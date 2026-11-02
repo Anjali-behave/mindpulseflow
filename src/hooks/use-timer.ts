@@ -34,7 +34,7 @@ export const timerControls = {
     actions.setTimer((t) => ({ ...t, mode, status: "idle", endsAt: undefined, remainingMs: (mode === "focus" ? t.focusMin : t.breakMin) * 60_000 })),
 };
 
-let completeListeners = new Set<(mode: "focus" | "break") => void>();
+const completeListeners = new Set<(mode: "focus" | "break") => void>();
 export function onTimerComplete(fn: (mode: "focus" | "break") => void) {
   completeListeners.add(fn);
   return () => void completeListeners.delete(fn);
