@@ -69,7 +69,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </nav>
         <TimerPill />
         <Link to="/settings" className="m-3 flex items-center gap-3 rounded-[var(--radius)] bg-pink/60 p-3 hover:bg-pink">
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-card font-display text-lg">{(name || "You")[0].toUpperCase()}</span>
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-card font-display text-lg">{(name || "You")[0]!.toUpperCase()}</span>
           <span className="text-sm">
             <span className="block font-bold">{name || "Hello, friend"}</span>
             <span className="text-muted-foreground">Saved on this device</span>

@@ -8,7 +8,7 @@ import { MoodFace, Celebrate } from "./brand";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 
-export function MoodPicker({ value, onChange, size = 48 }: { value?: MoodLevel; onChange: (m: MoodLevel) => void; size?: number }) {
+export function MoodPicker({ value, onChange, size = 48 }: { value?: MoodLevel | undefined; onChange: (m: MoodLevel) => void; size?: number }) {
   return (
     <div role="radiogroup" aria-label="How are you feeling?" className="flex flex-wrap justify-between gap-2">
       {MOODS.map((m) => {
