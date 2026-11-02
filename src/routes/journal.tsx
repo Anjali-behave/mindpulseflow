@@ -33,7 +33,7 @@ function Journal() {
   const [selected, setSelected] = useState<Date | null>(null);
   const [editing, setEditing] = useState<string | null>(null);
   const days = eachDayOfInterval({ start: startOfMonth(month), end: endOfMonth(month) });
-  const pad = (getDay(days[0]) + 6) % 7;
+  const pad = (getDay(days[0]!) + 6) % 7;
   const list = [...moods]
     .filter((m) => (selected ? isSameDay(new Date(m.at), selected) : true))
     .sort((a, b) => b.at.localeCompare(a.at));
@@ -67,7 +67,7 @@ function Journal() {
               const sel = selected && isSameDay(d, selected);
               return (
                 <button key={k} onClick={() => setSelected(sel ? null : d)} aria-pressed={!!sel}
-                  aria-label={`${format(d, "d MMMM")}: ${avg ? `${ms.length} check-in(s), mostly ${MOODS[avg - 1].label}` : "no check-ins"}`}
+                  aria-label={`${format(d, "d MMMM")}: ${avg ? `${ms.length} check-in(s), mostly ${MOODS[avg - 1]!.label}` : "no check-ins"}`}
                   className={cn("grid aspect-square place-items-center rounded-xl text-xs font-bold transition hover:bg-card", sel && "ring-2 ring-ring bg-card", isSameDay(d, new Date()) && "underline")}>
                   {avg ? <MoodFace level={avg} size={26} /> : format(d, "d")}
                 </button>
@@ -92,7 +92,7 @@ function Journal() {
                   <div className="flex gap-4">
                     <MoodFace level={m.mood} size={48} />
                     <div className="min-w-0 flex-1">
-                      <p className="font-bold">{MOODS[m.mood - 1].label}{m.energy ? <span className="font-normal text-muted-foreground"> · energy {m.energy}/5</span> : null}</p>
+                      <p className="font-bold">{MOODS[m.mood - 1]!.label}{m.energy ? <span className="font-normal text-muted-foreground"> · energy {m.energy}/5</span> : null}</p>
                       <p className="text-xs text-muted-foreground">{format(new Date(m.at), "EEE d MMM, p")}</p>
                       {m.tags.length > 0 && (
                         <div className="mt-2 flex flex-wrap gap-1">{m.tags.map((t) => <span key={t} className="rounded-full bg-lavender px-2 py-0.5 text-xs font-semibold">{t}</span>)}</div>

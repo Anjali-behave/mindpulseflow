@@ -166,6 +166,6 @@ function Insights() {
 function mostCommonHour(isos: string[]) {
   const c = new Map<number, number>();
   isos.forEach((i) => { const h = new Date(i).getHours(); c.set(h, (c.get(h) ?? 0) + 1); });
-  const h = [...c.entries()].sort((a, b) => b[1] - a[1])[0][0];
+  const h = [...c.entries()].sort((a, b) => b[1] - a[1])[0]![0];
   return new Date(2000, 0, 1, h).toLocaleTimeString([], { hour: "numeric" });
 }

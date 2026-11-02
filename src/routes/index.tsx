@@ -39,8 +39,8 @@ function Home() {
   const todayMood = moods.filter((m) => dayKey(m.at) === today).sort((a, b) => b.at.localeCompare(a.at))[0];
   const todaySessions = sessions.filter((s) => dayKey(s.completedAt) === today);
   const week = moodByDay(moods, lastNDays(7));
-  const enc = ENCOURAGEMENTS[new Date().getDate() % ENCOURAGEMENTS.length];
-  const hobby = useMemo(() => HOBBIES[new Date().getDate() % HOBBIES.length], []);
+  const enc = ENCOURAGEMENTS[new Date().getDate() % ENCOURAGEMENTS.length]!;
+  const hobby = useMemo(() => HOBBIES[new Date().getDate() % HOBBIES.length]!, []);
 
   return (
     <div className="grid gap-5 md:grid-cols-6">
@@ -87,7 +87,7 @@ function Home() {
           <div className="mt-4 flex items-center gap-4 rounded-2xl bg-muted p-4">
             <MoodFace level={todayMood.mood} size={56} />
             <div>
-              <p className="font-bold">You felt {MOODS[todayMood.mood - 1].label.toLowerCase()} at {format(new Date(todayMood.at), "p")}</p>
+              <p className="font-bold">You felt {MOODS[todayMood.mood - 1]!.label.toLowerCase()} at {format(new Date(todayMood.at), "p")}</p>
               <p className="text-sm text-muted-foreground">Feel free to check in again anytime — feelings shift.</p>
             </div>
           </div>
@@ -130,7 +130,7 @@ function Home() {
             <li key={d.key} className="flex flex-col items-center gap-1 text-xs font-bold">
               {d.mood ? <MoodFace level={Math.round(d.mood) as MoodLevel} size={30} /> : <span className="h-[30px] w-[30px] rounded-full border-2 border-dashed" aria-hidden />}
               <span className="text-muted-foreground">{d.label[0]}</span>
-              <span className="sr-only">{d.label}: {d.mood ? MOODS[Math.round(d.mood) - 1].label : "no check-in"}</span>
+              <span className="sr-only">{d.label}: {d.mood ? MOODS[Math.round(d.mood) - 1]!.label : "no check-in"}</span>
             </li>
           ))}
         </ul>

@@ -106,7 +106,7 @@ function Focus() {
           </div>
           <div className="flex flex-wrap gap-2">
             {[[25, 5], [50, 10], [15, 3]].map(([f, b]) => (
-              <Button key={f} size="sm" variant="outline" disabled={!idle} onClick={() => { setDur("focusMin", f); setDur("breakMin", b); }}>{f}/{b}</Button>
+              <Button key={f} size="sm" variant="outline" disabled={!idle} onClick={() => { setDur("focusMin", f!); setDur("breakMin", b!); }}>{f}/{b}</Button>
             ))}
           </div>
           {!idle && <p className="text-xs text-muted-foreground">Reset the timer to change durations.</p>}

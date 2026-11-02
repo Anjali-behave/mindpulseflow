@@ -3,15 +3,15 @@ export type MoodLevel = 1 | 2 | 3 | 4 | 5;
 export interface MoodEntry {
   id: string;
   mood: MoodLevel;
-  energy?: number; // 1-5
+  energy?: number | undefined; // 1-5
   tags: string[];
-  note?: string;
+  note?: string | undefined;
   at: string; // ISO datetime
 }
 
 export interface FocusSession {
   id: string;
-  task?: string;
+  task?: string | undefined;
   minutes: number;
   completedAt: string;
 }
@@ -26,16 +26,16 @@ export interface Task {
   category: Category;
   minutes: number;
   date: string; // yyyy-MM-dd planned day
-  deadline?: string; // yyyy-MM-dd
-  time?: string; // HH:mm
+  deadline?: string | undefined; // yyyy-MM-dd
+  time?: string | undefined; // HH:mm
   done: boolean;
-  doneAt?: string;
+  doneAt?: string | undefined;
 }
 
 export interface TimerState {
   mode: "focus" | "break";
   status: "idle" | "running" | "paused";
-  endsAt?: number; // epoch ms, source of truth while running
+  endsAt?: number | undefined; // epoch ms, source of truth while running
   remainingMs: number; // used while paused/idle
   task: string;
   focusMin: number;

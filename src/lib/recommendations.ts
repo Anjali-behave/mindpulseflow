@@ -7,8 +7,8 @@ export interface Recommendation {
   title: string;
   reason: string;
   kind: "start-first" | "add-break" | "lighten-day";
-  task?: Task;
-  draft?: Partial<Task>;
+  task?: Task | undefined;
+  draft?: Partial<Task> | undefined;
 }
 
 const prioRank = { high: 0, medium: 1, low: 2 } as const;
@@ -45,7 +45,7 @@ export function getRecommendations(tasks: Task[], moods: MoodEntry[], now = new 
 
   const total = open.reduce((s, t) => s + t.minutes, 0);
   if (total > HEAVY_DAY_MINUTES) {
-    const lowest = [...open].sort((a, b) => prioRank[b.priority] - prioRank[a.priority])[0];
+    const lowest = [...open].sort((a, b) => prioRank[b.priority] - prioRank[a.priority])[0]!;
     recs.push({
       id: `lighten-${today}-${lowest.id}`,
       kind: "lighten-day",
